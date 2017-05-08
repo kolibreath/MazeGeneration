@@ -53,13 +53,14 @@ public class MazeView extends View{
         whitPaint.setStyle(Paint.Style.FILL);
 
         canvas.drawRect(160,160,260,260,whitPaint);
-
         Maze maze = new Maze(mazeGrid);
         maze.setMarked(GridX, GridY);
         int tempX ,tempY;
         boolean unfinished = maze.ifFinished(count,bottomRightX);
         int randomDirection ;
         boolean whetherDrawable ;
+
+
         while(!unfinished){
 
             randomDirection = maze.randomDirections();
@@ -79,9 +80,6 @@ public class MazeView extends View{
 
 
             if(whetherDrawable){
-                //如果可以的话就在Grid将这个矩阵的坐标随机的方向移动
-                //但是 万一1这个移动到了我边界怎么办？？
-                //判断 只有移动之后不是边界在同时进行二维数组和坐标移动！
                 switch (randomDirection) {
                     case 1:
                         GridY++;
@@ -137,6 +135,14 @@ public class MazeView extends View{
             }
         }
 
+
+    private int[] coordinateTrans(int GridX,int GridY){
+        int X = 160 + (GridX-1)*100;
+        int Y = 160 + (GridY-1)*100;
+        int cArray [] = {X,Y};
+        return cArray;
+    }
+
     private int[] processWithGridCoordinates(int random,int GridX,int GridY){
         //注意GridX 和 GridY的初始坐标为(1,1)
         int newCoodX = 1;
@@ -144,7 +150,7 @@ public class MazeView extends View{
         int coordinate[] = {newCoodX,newCoodY};
         switch (random){
             case 1:
-                coordinate[0] = GridY + 1;
+                coordinate[1] = GridY + 1;
                 break;
             case 2:
                 coordinate[1] = GridY - 1;
@@ -153,7 +159,7 @@ public class MazeView extends View{
                 coordinate[0]= GridX - 1;
                 break;
             case 4:
-                coordinate[1] = GridY + 1;
+                coordinate[0] = GridX + 1;
                 break;
         }
         return  coordinate;
