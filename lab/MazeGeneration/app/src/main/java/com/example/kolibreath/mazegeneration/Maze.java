@@ -72,13 +72,18 @@ public class Maze {
 
 
     public boolean ifFinished(int count,int bottomLeftX ) {
-        if (count >50&&bottomLeftX==960){
+        if (count >60&&bottomLeftX==960){
             return true;
         } else {
             return false;
         }
     }
 
+
+    //设置exit的值为10
+    public void setExitMark(int GridX,int GridY){
+        mazeGrid[GridX][GridY] = 10;
+    }
 
     //判断这个一个方块是否能涂色 判断是否出界，判断是否已经被涂色
     //还需要判断数组是否越界
